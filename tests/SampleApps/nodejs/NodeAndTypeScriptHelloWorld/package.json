@@ -16,7 +16,7 @@
   "dependencies": {
     "@types/node": "7.0.22",
     "express": "4.20.0",
-    "nodemon": "1.11.0"
+    "nodemon": "1.14.11"
   },
   "devDependencies": {
     "@types/mocha": "2.2.41",
