@@ -92,13 +92,13 @@ chardet==3.0.4
 Click==7.0
 coreapi==2.3.3
 coreschema==0.0.4
-cryptography==39.0.1
+cryptography==43.0.1
 dj-database-url==0.4.2
 Django==2.2.28
 django-storages==1.7.1
 djangorestframework==3.7.7
 flake8==3.6.0
-grpcio==1.14.2
+grpcio==1.53.2
 grpcio-tools==1.14.2
 gunicorn==19.7.1
 idna==2.7
@@ -111,12 +111,12 @@ mccabe==0.6.1
 msrest==0.6.2
 msrestazure==0.5.1
 oauthlib==2.1.0
-protobuf==3.15.0
+protobuf==3.18.3
 psycopg2==2.9.1
 pycodestyle==2.4.0
 pycparser==2.19
 pyflakes==2.0.0
-Pygments==2.7.4
+Pygments==2.15.0
 PyJWT==2.4.0
 python-dateutil==2.7.5
 python-dotenv==0.9.1
@@ -127,3 +127,4 @@ six==1.11.0
 uritemplate==3.0.0
 urllib3==1.26.5
 whitenoise==3.3.1
+sqlparse>=0.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
