@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/acucciniello/setup-postgres#readme",
   "dependencies": {
-    "express": "^4.20.0",
+    "express": "^4.21.1",
     "pg": "^7.7.1",
     "pg-format": "^1.0.4"
   }
