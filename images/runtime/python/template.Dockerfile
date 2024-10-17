@@ -2,7 +2,7 @@ ARG DEBIAN_FLAVOR
 ARG BASE_IMAGE
 
 # Startup script generator
-FROM mcr.microsoft.com/oss/go/microsoft/golang:1.20-${DEBIAN_FLAVOR} as startupCmdGen
+FROM mcr.microsoft.com/oss/go/microsoft/golang:1.23.1-${DEBIAN_FLAVOR} as startupCmdGen
 # GOPATH is set to "/go" in the base image
 WORKDIR /go/src
 COPY src/startupscriptgenerator/src .
@@ -45,8 +45,8 @@ ARG PYTHON_MAJOR_VERSION
 
 ENV PYTHON_VERSION ${PYTHON_FULL_VERSION}
 RUN true
-COPY build/__pythonVersions.sh ${BUILD_DIR}
-RUN true
+# COPY build/__pythonVersions.sh ${BUILD_DIR}
+# RUN true
 COPY platforms/__common.sh /tmp/
 RUN true
 COPY platforms/python/prereqs/build.sh /tmp/

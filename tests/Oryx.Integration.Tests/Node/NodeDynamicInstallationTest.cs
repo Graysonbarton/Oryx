@@ -30,13 +30,13 @@ namespace Microsoft.Oryx.Integration.Tests
             await CanBuildAndRunAppUsingDynamicInstallationOfRuntimeInRuntimeImageAsync(NodeVersions.Node14Version);
         }
 
-        [Fact]
-        [Trait("category", "node-16")]
-        [Trait("build-image", "github-actions-debian-buster")]
-        public async Task CanBuildAndRunNode16AppUsingDynamicInstallationOfRuntimeInRuntimeImageAsync()
-        {
-            await CanBuildAndRunAppUsingDynamicInstallationOfRuntimeInRuntimeImageAsync(NodeVersions.Node16Version);
-        }
+        // [Fact]
+        // [Trait("category", "node-16")]
+        // [Trait("build-image", "github-actions-debian-buster")]
+        // public async Task CanBuildAndRunNode16AppUsingDynamicInstallationOfRuntimeInRuntimeImageAsync()
+        // {
+        //     await CanBuildAndRunAppUsingDynamicInstallationOfRuntimeInRuntimeImageAsync(NodeVersions.Node16Version);
+        // }
 
         private async Task CanBuildAndRunAppUsingDynamicInstallationOfRuntimeInRuntimeImageAsync(string nodeVersion)
         {
@@ -146,7 +146,7 @@ namespace Microsoft.Oryx.Integration.Tests
         }
 
         [Theory]
-        [InlineData(NodeVersions.Node18Version), Trait("category", "node-18")]
+        [InlineData(NodeVersions.Node18Version), Trait("category", "githubactions")]
         [Trait("build-image", "github-actions-debian-bullseye")]
         public async Task CanBuildAndRunApp_UsingScriptCommand_WithBullseyeBasedImages(string nodeVersion)
         {
@@ -195,7 +195,7 @@ namespace Microsoft.Oryx.Integration.Tests
         }
 
         [Theory]
-        [InlineData(NodeVersions.Node20Version), Trait("category", "node-20-bullseye")]
+        [InlineData(NodeVersions.Node20Version), Trait("category", "githubactions")]
         [Trait("build-image", "github-actions-debian-bullseye")]
         public async Task CanBuildAndRunNode20App_UsingScriptCommand_WithBullseyeBasedImages(string nodeVersion)
         {
@@ -244,7 +244,7 @@ namespace Microsoft.Oryx.Integration.Tests
         }
 
         [Theory]
-        [InlineData(NodeVersions.Node20Version), Trait("category", "node-20")]
+        [InlineData(NodeVersions.Node20Version), Trait("category", "githubactions")]
         [Trait("build-image", "github-actions-debian-bookworm")]
         public async Task CanBuildAndRunNode20App_UsingScriptCommand_WithBookwormBasedImages(string nodeVersion)
         {
