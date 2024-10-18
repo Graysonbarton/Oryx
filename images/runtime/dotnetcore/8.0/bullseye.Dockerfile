@@ -1,6 +1,6 @@
 # dotnet tools are currently available as part of SDK so we need to create them in an sdk image
 # and copy them to our final runtime image
-FROM mcr.microsoft.com/dotnet/sdk:8.0-preview AS tools-install
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS tools-install
 RUN dotnet tool install --tool-path /dotnetcore-tools dotnet-sos
 RUN dotnet tool install --tool-path /dotnetcore-tools dotnet-trace
 RUN dotnet tool install --tool-path /dotnetcore-tools dotnet-dump
@@ -9,7 +9,7 @@ RUN dotnet tool install --tool-path /dotnetcore-tools dotnet-gcdump
 RUN dotnet tool install --tool-path /dotnetcore-tools dotnet-monitor --version 8.*
 
 # Startup script generator
-FROM mcr.microsoft.com/oss/go/microsoft/golang:1.20-bullseye as startupCmdGen
+FROM mcr.microsoft.com/oss/go/microsoft/golang:1.23.1-bullseye as startupCmdGen
 
 # GOPATH is set to "/go" in the base image
 WORKDIR /go/src
@@ -53,6 +53,11 @@ ENV ASPNETCORE_URLS=http://+:80 \
 
 COPY --from=tools-install /dotnetcore-tools /opt/dotnetcore-tools
 
+ARG NET_CORE_APP_80_SHA
+ARG ASPNET_CORE_APP_80_SHA
+ARG NET_CORE_APP_80
+ARG ASPNET_CORE_APP_80
+
 # Install .NET Core
 RUN set -ex \
 # based on resolution on https://github.com/NuGet/Announcements/issues/49#issue-795386700
@@ -60,7 +65,6 @@ RUN set -ex \
     && apt-get purge ca-certificates -y \
     && apt-get update \
     && apt-get install -f ca-certificates -y --no-install-recommends \
-    && . ${BUILD_DIR}/__dotNetCoreRunTimeVersions.sh \
     && curl -SL --output dotnet.tar.gz https://dotnetcli.azureedge.net/dotnet/Runtime/$NET_CORE_APP_80/dotnet-runtime-$NET_CORE_APP_80-linux-x64.tar.gz \
     && echo "$NET_CORE_APP_80_SHA dotnet.tar.gz" | sha512sum -c - \
     && mkdir -p /usr/share/dotnet \
@@ -68,7 +72,6 @@ RUN set -ex \
     && rm dotnet.tar.gz \
     && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet \
     # Install ASP.NET Core
-    && . ${BUILD_DIR}/__dotNetCoreRunTimeVersions.sh \
     && curl -SL --output aspnetcore.tar.gz https://dotnetcli.azureedge.net/dotnet/aspnetcore/Runtime/$ASPNET_CORE_APP_80/aspnetcore-runtime-$ASPNET_CORE_APP_80-linux-x64.tar.gz \
     && echo "$ASPNET_CORE_APP_80_SHA aspnetcore.tar.gz" | sha512sum -c - \
     && mkdir -p /usr/share/dotnet \
@@ -82,7 +85,7 @@ ARG AI_CONNECTION_STRING
 ARG USER_DOTNET_AI_VERSION
 ENV USER_DOTNET_AI_VERSION=${USER_DOTNET_AI_VERSION}
 ENV ORYX_AI_CONNECTION_STRING=${AI_CONNECTION_STRING} 
-ENV DOTNET_VERSION=%DOTNET_VERSION%
+ENV DOTNET_VERSION="8.0"
 ENV ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
 #Bake in client certificate path into image to avoid downloading it
 ENV PATH_CA_CERTIFICATE="/etc/ssl/certs/ca-certificate.crt"

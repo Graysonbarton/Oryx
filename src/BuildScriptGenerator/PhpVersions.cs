@@ -18,15 +18,15 @@ namespace Microsoft.Oryx.BuildScriptGenerator.Common
         public const string Composer24Version = "2.4.4";
         public const string Composer25Version = "2.5.8";
         public const string Composer26Version = "2.6.2";
-        public const string Php83Version = "8.3.4";
+        public const string Php83Version = "8.3.12";
         public const string Php83Keys = "1198C0117593497A5EC5C199286AF1F9897469DC AFD8691FDAEDF03BDF6E460563F15A9B715376CA";
-        public const string Php83TarSha256 = "39a337036a546e5c28aea76cf424ac172db5156bd8a8fd85252e389409a5ba63";
-        public const string Php82Version = "8.2.17";
+        public const string Php83TarSha256 = "f774e28633e26fc8c5197f4dae58ec9e3ff87d1b4311cbc61ab05a7ad24bd131";
+        public const string Php82Version = "8.2.24";
         public const string Php82Keys = "1198C0117593497A5EC5C199286AF1F9897469DC 39B641343D8C104B2B146DC3F9C39DC0B9698544";
-        public const string Php82TarSha256 = "1cc4ef733ba58f6557db648012471f1916e5bac316303aa165535bedab08ee35";
-        public const string Php81Version = "8.1.27";
+        public const string Php82TarSha256 = "80a5225746a9eb484475b312d4c626c63a88a037d8e56d214f30205e1ba1411a";
+        public const string Php81Version = "8.1.30";
         public const string Php81Keys = "528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544";
-        public const string Php81TarSha256 = "479e65c3f05714d4aace1370e617d78e49e996ec7a7579a5be47535be61f0658";
+        public const string Php81TarSha256 = "f24a6007f0b25a53cb7fbaee69c85017e0345b62089c2425a0afb7e177192ed1";
         public const string Php80Version = "8.0.30";
         public const string Php80Keys = "1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F";
         public const string Php80TarSha256 = "216ab305737a5d392107112d618a755dc5df42058226f1670e9db90e77d777d9";
@@ -46,6 +46,6 @@ namespace Microsoft.Oryx.BuildScriptGenerator.Common
         public const string Php56Keys = "0BD78B5F97500D450838F95DFE857D9A90D90EC1 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3";
         public const string Php56TarSha256 = "1369a51eee3995d7fbd1c5342e5cc917760e276d561595b6052b21ace2656d1c";
         public static readonly List<string> RuntimeVersions = new List<string> { "7.4-debian-bullseye", "7.4-debian-buster", "8.0-debian-bullseye", "8.0-debian-buster", "8.1-debian-bullseye", "8.1-debian-buster", "8.2-debian-bullseye", "8.2-debian-buster", "8.3-debian-bullseye", "8.3-debian-buster", "8.3-debian-bookworm" };
-        public static readonly List<string> FpmRuntimeVersions = new List<string> { "7.4-fpm-debian-bullseye", "7.4-fpm-debian-buster", "8.0-fpm-debian-bullseye", "8.0-fpm-debian-buster", "8.1-fpm-debian-bullseye", "8.1-fpm-debian-buster", "8.2-fpm-debian-bullseye", "8.2-fpm-debian-buster", "8.3-fpm-debian-bullseye", "8.3-fpm-debian-buster", "8.3-fpm-debian-bookworm" };
+        public static readonly List<string> FpmRuntimeVersions = new List<string> { "7.4-fpm-debian-bullseye", "8.0-fpm-debian-bullseye", "8.1-fpm-debian-bullseye", "8.2-fpm-debian-bullseye", "8.3-fpm-debian-bullseye", "8.3-fpm-debian-bookworm" };
     }
 }
