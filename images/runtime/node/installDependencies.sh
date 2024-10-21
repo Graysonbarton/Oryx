@@ -6,12 +6,15 @@
 
 set -ex
 
-source /tmp/oryx/build/__nodeVersions.sh
+# source /tmp/oryx/build/__nodeVersions.sh
 
 # All users need access to node_modules at the root, as this is the location
 # for packages valid for all apps.
 mkdir -p /node_modules
 chmod 777 /node_modules
+
+# PM2_VERSION=$1
+# NODE_APP_INSIGHTS_SDK_VERSION=$2
 
 # Since older versions of npm cli have security vulnerabilities, we try upgrading it
 # to the latest available version. However latest versions of npm do not work with very
@@ -30,7 +33,7 @@ echo "Version of npm: $currentNpmVersion"
 # Upgrade npm to the latest available version
 if [[ $nodeVersionMajor -ge 18  ]]; then
     echo "Upgrading npm..."
-    npm install npm@10.5.0 -g -loglevel silent
+    npm install npm@10.7.0 -g -loglevel silent
     echo "Done upgrading npm."
     currentNpmVersion=$(npm --version)
     echo "Version of npm after upgrade: $currentNpmVersion"

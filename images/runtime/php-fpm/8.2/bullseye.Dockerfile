@@ -1,7 +1,7 @@
 ARG BASE_IMAGE
 
 # Startup script generator
-FROM mcr.microsoft.com/oss/go/microsoft/golang:1.20-bullseye as startupCmdGen
+FROM mcr.microsoft.com/oss/go/microsoft/golang:1.23.1-bullseye as startupCmdGen
 
 # GOPATH is set to "/go" in the base image
 WORKDIR /go/src
@@ -59,9 +59,11 @@ ENV PHP_LDFLAGS="-Wl,-O1 -Wl,--hash-style=both -pie"
 
 ENV GPG_KEYS 1198C0117593497A5EC5C199286AF1F9897469DC 39B641343D8C104B2B146DC3F9C39DC0B9698544 E60913E4DF209907D8E30D96659A97C9CF2A795A
 
-ENV PHP_VERSION 8.2.17
-ENV PHP_URL="https://www.php.net/get/php-8.2.17.tar.xz/from/this/mirror" PHP_ASC_URL="https://www.php.net/get/php-8.2.17.tar.xz.asc/from/this/mirror"
-ENV PHP_SHA256="1cc4ef733ba58f6557db648012471f1916e5bac316303aa165535bedab08ee35" PHP_MD5=""
+ARG PHP_VERSION
+ARG PHP_SHA256
+ENV PHP_VERSION ${PHP_VERSION}
+ENV PHP_URL="https://www.php.net/get/php-${PHP_VERSION}.tar.xz/from/this/mirror" PHP_ASC_URL="https://www.php.net/get/php-${PHP_VERSION}.tar.xz.asc/from/this/mirror" PHP_MD5=""
+ENV PHP_SHA256 ${PHP_SHA256}
 
 RUN set -eux; \
 	\
@@ -268,8 +270,6 @@ CMD ["php-fpm"]
 ## base dockerfile
 SHELL ["/bin/bash", "-c"]
 
-ARG PHP_VERSION
-ENV PHP_VERSION ${PHP_VERSION}
 
 # An environment variable for oryx run-script to know the origin of php image so that
 # start-up command can be determined while creating run script

@@ -20,6 +20,7 @@ x86/
 bld/
 [Oo]bj/
 [Ll]og/
+Binaries/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -269,3 +270,6 @@ src/startupscriptgenerator/src/**/__debug_bin
 src/startupscriptgenerator/src/**/run.sh
 !**/dynamic/Dockerfile
 !**/dynamic/buster.Dockerfile
+
+# needed just for pr description
+Updated_Values.txt

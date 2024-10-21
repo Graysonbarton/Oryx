@@ -1,6 +1,6 @@
 ARG BASE_IMAGE
 # Startup script generator
-FROM mcr.microsoft.com/oss/go/microsoft/golang:1.20-bookworm as startupCmdGen
+FROM mcr.microsoft.com/oss/go/microsoft/golang:1.23.1-bookworm as startupCmdGen
 
 # GOPATH is set to "/go" in the base image
 WORKDIR /go/src
@@ -26,9 +26,10 @@ RUN set -eux \
 		gnupg2 \
 		apt-transport-https \
 	&& curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-	&& curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+	&& curl https://packages.microsoft.com/config/debian/12/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+	&& curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg \
 	&& apt-get update \
-	&& ACCEPT_EULA=Y apt-get install -y msodbcsql17 msodbcsql18=18.1.2.1-1 odbcinst1debian2=2.3.7 odbcinst=2.3.7 unixodbc=2.3.7 unixodbc-dev=2.3.7
+	&& ACCEPT_EULA=Y apt-get install -y msodbcsql17=17.10.6.1-1 msodbcsql18=18.3.3.1-1 odbcinst1debian2=2.3.11-2+deb12u1 odbcinst=2.3.11-2+deb12u1 unixodbc=2.3.11-2+deb12u1 unixodbc-dev=2.3.11-2+deb12u1
 
 ENV PHP_INI_DIR /usr/local/etc/php
 RUN set -eux; \
@@ -56,9 +57,11 @@ ENV PHP_LDFLAGS="-Wl,-O1 -Wl,--hash-style=both -pie"
 
 ENV GPG_KEYS 1198C0117593497A5EC5C199286AF1F9897469DC AFD8691FDAEDF03BDF6E460563F15A9B715376CA C28D937575603EB4ABB725861C0779DC5C0A9DE4
 
-ENV PHP_VERSION 8.3.4
-ENV PHP_URL="https://www.php.net/get/php-8.3.4.tar.xz/from/this/mirror" PHP_ASC_URL="https://www.php.net/get/php-8.3.4.tar.xz.asc/from/this/mirror"
-ENV PHP_SHA256="39a337036a546e5c28aea76cf424ac172db5156bd8a8fd85252e389409a5ba63" PHP_MD5=""
+ARG PHP_VERSION
+ARG PHP_SHA256
+ENV PHP_VERSION ${PHP_VERSION}
+ENV PHP_URL="https://www.php.net/get/php-${PHP_VERSION}.tar.xz/from/this/mirror" PHP_ASC_URL="https://www.php.net/get/php-${PHP_VERSION}.tar.xz.asc/from/this/mirror" PHP_MD5=""
+ENV PHP_SHA256 ${PHP_SHA256}
 
 RUN set -eux; \
 	\
@@ -261,10 +264,6 @@ CMD ["php-fpm"]
 
 ## base dockefile
 SHELL ["/bin/bash", "-c"]
-
-ARG PHP_VERSION
-ENV PHP_VERSION ${PHP_VERSION}
-
 
 # An environment variable for oryx run-script to know the origin of php image so that
 # start-up command can be determined while creating run script
