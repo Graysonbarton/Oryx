@@ -1,0 +1,65 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - awesome-typescript-loader > micromatch > snapdragon > debug:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:debug:20170905'
+        path: awesome-typescript-loader > micromatch > snapdragon > debug
+    - awesome-typescript-loader > micromatch > nanomatch > snapdragon > debug:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:debug:20170905'
+        path: >-
+          awesome-typescript-loader > micromatch > nanomatch > snapdragon >
+          debug
+    - awesome-typescript-loader > micromatch > braces > snapdragon > debug:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:debug:20170905'
+        path: awesome-typescript-loader > micromatch > braces > snapdragon > debug
+    - awesome-typescript-loader > micromatch > extglob > snapdragon > debug:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:debug:20170905'
+        path: awesome-typescript-loader > micromatch > extglob > snapdragon > debug
+    - awesome-typescript-loader > micromatch > extglob > expand-brackets > snapdragon > debug:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:debug:20170905'
+        path: >-
+          awesome-typescript-loader > micromatch > extglob > expand-brackets >
+          snapdragon > debug
+    - awesome-typescript-loader > micromatch > extglob > expand-brackets > debug:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:debug:20170905'
+        path: >-
+          awesome-typescript-loader > micromatch > extglob > expand-brackets >
+          debug
+  'npm:ms:20170412':
+    - awesome-typescript-loader > micromatch > snapdragon > debug > ms:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:ms:20170412'
+        path: awesome-typescript-loader > micromatch > snapdragon > debug > ms
+    - awesome-typescript-loader > micromatch > nanomatch > snapdragon > debug > ms:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:ms:20170412'
+        path: >-
+          awesome-typescript-loader > micromatch > nanomatch > snapdragon >
+          debug > ms
+    - awesome-typescript-loader > micromatch > braces > snapdragon > debug > ms:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:ms:20170412'
+        path: >-
+          awesome-typescript-loader > micromatch > braces > snapdragon > debug >
+          ms
+    - awesome-typescript-loader > micromatch > extglob > snapdragon > debug > ms:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:ms:20170412'
+        path: >-
+          awesome-typescript-loader > micromatch > extglob > snapdragon > debug
+          > ms
+    - awesome-typescript-loader > micromatch > extglob > expand-brackets > snapdragon > debug > ms:
+        patched: '2024-10-25T18:17:43.363Z'
+        id: 'npm:ms:20170412'
+        path: >-
+          awesome-typescript-loader > micromatch > extglob > expand-brackets >
+          snapdragon > debug > ms
