@@ -1,0 +1,10 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:lodash:20180130':
+    - react-forms > lodash:
+        patched: '2024-10-25T20:37:29.801Z'
+        id: 'npm:lodash:20180130'
+        path: react-forms > lodash
