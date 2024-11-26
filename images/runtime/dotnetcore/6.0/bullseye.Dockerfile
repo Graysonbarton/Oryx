@@ -9,7 +9,7 @@ RUN dotnet tool install --tool-path /dotnetcore-tools dotnet-gcdump
 RUN dotnet tool install --tool-path /dotnetcore-tools dotnet-monitor --version 7.*
 
 # Startup script generator
-FROM mcr.microsoft.com/oss/go/microsoft/golang:1.20-bullseye as startupCmdGen
+FROM mcr.microsoft.com/oss/go/microsoft/golang:1.23.1-bullseye as startupCmdGen
 
 # GOPATH is set to "/go" in the base image
 WORKDIR /go/src
@@ -56,17 +56,19 @@ ENV ASPNETCORE_URLS=http://+:80 \
 
 COPY --from=tools-install /dotnetcore-tools /opt/dotnetcore-tools
 
+ARG NET_CORE_APP_60_SHA
+ARG ASPNET_CORE_APP_60_SHA
+ARG NET_CORE_APP_60
+ARG ASPNET_CORE_APP_60
+
 # Install .NET Core
 RUN set -ex \
-    && . ${BUILD_DIR}/__dotNetCoreRunTimeVersions.sh \
     && curl -SL --output dotnet.tar.gz https://dotnetcli.azureedge.net/dotnet/Runtime/$NET_CORE_APP_60/dotnet-runtime-$NET_CORE_APP_60-linux-x64.tar.gz \
     && echo "$NET_CORE_APP_60_SHA dotnet.tar.gz" | sha512sum -c - \
     && mkdir -p /usr/share/dotnet \
     && tar -zxf dotnet.tar.gz -C /usr/share/dotnet \
     && rm dotnet.tar.gz \
     && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet \
-    # Install ASP.NET Core
-    && . ${BUILD_DIR}/__dotNetCoreRunTimeVersions.sh \
     && curl -SL --output aspnetcore.tar.gz https://dotnetcli.azureedge.net/dotnet/aspnetcore/Runtime/$ASPNET_CORE_APP_60/aspnetcore-runtime-$ASPNET_CORE_APP_60-linux-x64.tar.gz \
     && echo "$ASPNET_CORE_APP_60_SHA aspnetcore.tar.gz" | sha512sum -c - \
     && mkdir -p /usr/share/dotnet \
@@ -80,7 +82,7 @@ ARG AI_CONNECTION_STRING
 ARG USER_DOTNET_AI_VERSION
 ENV USER_DOTNET_AI_VERSION=${USER_DOTNET_AI_VERSION}
 ENV ORYX_AI_CONNECTION_STRING=${AI_CONNECTION_STRING} 
-ENV DOTNET_VERSION=%DOTNET_VERSION%
+ENV DOTNET_VERSION="6.0"
 ENV ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
 #Bake in client certificate path into image to avoid downloading it
 ENV PATH_CA_CERTIFICATE="/etc/ssl/certs/ca-certificate.crt"
